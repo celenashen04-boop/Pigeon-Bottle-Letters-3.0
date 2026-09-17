@@ -341,37 +341,37 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
       {/* Centering wrapper with generous top padding to bring modal down and ensure everything fits into frame without clipping */}
       <div className="min-h-full flex items-start justify-center p-2 sm:p-4 pt-6 sm:pt-10 pb-16">
         <div 
-          className={`rounded-2xl max-w-4xl w-full p-4 sm:p-6 paper-shadow-deep relative shadow-2xl transition-all duration-300 ${
+          className={`rounded-2xl max-w-4xl w-full p-4 sm:p-6 paper-shadow-deep relative shadow-2xl transition-all duration-300 bg-[#ffffff] ${
             isBottle 
-              ? 'bg-[#07131e] border border-[#193950] text-[#d4e7f5] ring-1 ring-[#0284c7]/30 shadow-[0_25px_60px_-15px_rgba(2,132,199,0.35)]' 
-              : 'bg-[#211b16] border border-[#4d3d2f] text-[#ded0bf]'
+              ? 'border border-[#bae6fd] text-[#0f172a] shadow-[0_20px_50px_rgba(2,132,199,0.15)]' 
+              : 'border border-[#e7e5e4] text-[#1c1917]'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
         {/* Subtle Ambient Ocean Gradient Glow for Bottle Mode */}
         {isBottle && (
-          <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#0284c7]/20 via-[#0369a1]/10 to-transparent pointer-events-none rounded-t-2xl" />
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#e0f2fe]/60 to-transparent pointer-events-none rounded-t-2xl" />
         )}
 
         {/* Header Bar */}
         <div className={`flex items-center justify-between pb-4 border-b mb-4 relative z-10 ${
-          isBottle ? 'border-[#15344a]' : 'border-[#3b2e23]'
+          isBottle ? 'border-[#e0f2fe]' : 'border-[#e7e5e4]'
         }`}>
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-xl border flex items-center justify-center transition-colors ${
               isBottle 
-                ? 'bg-[#0b283d] border-[#1b557b] text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.35)]' 
-                : 'bg-[#362b22] border-[#524132] text-[#e0af68]'
+                ? 'bg-[#e0f2fe] border-[#bae6fd] text-[#0284c7]' 
+                : 'bg-[#fef3c7] border-[#fde68a] text-[#b45309]'
             }`}>
               {isBottle ? <Waves className="w-5 h-5" /> : <Feather className="w-5 h-5" />}
             </div>
             <div>
-              <h2 className={`text-xl font-display font-bold ${isBottle ? 'text-[#f0f9ff]' : 'text-[#f5ebd7]'}`}>
+              <h2 className={`text-xl font-display font-bold ${isBottle ? 'text-[#0f172a]' : 'text-[#1c1917]'}`}>
                 {isBottle 
                   ? 'Cast an Ocean Drift Scroll' 
                   : (replyToLetter ? 'Craft a Pen-Pal Reply' : 'Compose a Slow Letter')}
               </h2>
-              <p className={`text-xs font-serif-vintage ${isBottle ? 'text-[#7ea5bd]' : 'text-[#9d8975]'}`}>
+              <p className={`text-xs font-serif-vintage ${isBottle ? 'text-[#475569]' : 'text-[#78716c]'}`}>
                 {isBottle 
                   ? 'Entrusted to tinted sea-glass and worldwide oceanic gyres, awaiting a distant shore.'
                   : 'Words entrusted to the wind and tide, without guarantee of return.'}
@@ -381,10 +381,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
           <button
             onClick={onClose}
-            className={`p-1.5 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
               isBottle 
-                ? 'text-[#7ea5bd] hover:text-[#f0f9ff] hover:bg-[#0e2c40]' 
-                : 'text-[#9d8975] hover:text-[#f2e6d6] hover:bg-[#34281f]'
+                ? 'text-[#64748b] hover:text-[#0f172a] hover:bg-[#f0f9ff]' 
+                : 'text-[#78716c] hover:text-[#1c1917] hover:bg-[#f5f5f4]'
             }`}
           >
             <X className="w-5 h-5" />
@@ -396,26 +396,22 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
           <button
             type="button"
             onClick={() => handleSelectDeliveryMode('pigeon')}
-            className={`p-3 rounded-xl border text-left flex items-start gap-3 transition-all ${
+            className={`p-3 rounded-xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
               deliveryMode === 'pigeon'
-                ? 'bg-[#3b2c21] border-[#d97706] text-[#fef9f3] shadow-md'
-                : isBottle
-                  ? 'bg-[#091a26] border-[#143247] text-[#6e92a7] hover:bg-[#0e2535] hover:text-[#a2c8de]'
-                  : 'bg-[#1a1511] border-[#382b21] text-[#9e8b79] hover:bg-[#251e18]'
+                ? 'bg-[#fef3c7] border-[#fde68a] text-[#92400e] shadow-sm'
+                : 'bg-[#ffffff] border-[#e7e5e4] text-[#78716c] hover:bg-[#faf8f5] hover:text-[#1c1917]'
             }`}
           >
             <div className={`p-2 rounded-lg ${
               deliveryMode === 'pigeon' 
-                ? 'bg-[#d97706] text-[#1a1511]' 
-                : isBottle 
-                  ? 'bg-[#0c2436] text-[#698da2]' 
-                  : 'bg-[#2b221a] text-[#8e7b6a]'
+                ? 'bg-[#b45309] text-[#ffffff]' 
+                : 'bg-[#f5f5f4] text-[#78716c]'
             }`}>
               <Feather className="w-4 h-4" />
             </div>
             <div>
-              <div className="font-serif-vintage font-bold text-sm">Carrier Pigeon Post</div>
-              <div className={`text-xs mt-0.5 ${isBottle ? 'text-[#7b9eb3]' : 'text-[#b8a694]'}`}>
+              <div className="font-serif-vintage font-bold text-sm text-[#1c1917]">Carrier Pigeon Post</div>
+              <div className="text-xs mt-0.5 text-[#78716c]">
                 Addressed to one specific person. Travel time is influenced by weather, seasons, and distance.
               </div>
             </div>
@@ -424,24 +420,24 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
           <button
             type="button"
             onClick={() => handleSelectDeliveryMode('bottle')}
-            className={`p-3 rounded-xl border text-left flex items-start gap-3 transition-all ${
+            className={`p-3 rounded-xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
               deliveryMode === 'bottle'
-                ? 'bg-gradient-to-r from-[#0c2f45] to-[#082233] border-[#38bdf8] text-[#f0f9ff] shadow-[0_0_20px_rgba(56,189,248,0.35)] ring-1 ring-[#38bdf8]/60'
-                : 'bg-[#1a1511] border-[#382b21] text-[#9e8b79] hover:bg-[#251e18]'
+                ? 'bg-[#e0f2fe] border-[#7dd3fc] text-[#0369a1] shadow-sm ring-1 ring-[#38bdf8]/40'
+                : 'bg-[#ffffff] border-[#e7e5e4] text-[#78716c] hover:bg-[#f0f9ff] hover:text-[#0f172a]'
             }`}
           >
             <div className={`p-2 rounded-lg ${
               deliveryMode === 'bottle' 
-                ? 'bg-[#38bdf8] text-[#051c29] shadow-[0_0_10px_rgba(56,189,248,0.5)]' 
-                : 'bg-[#2b221a] text-[#8e7b6a]'
+                ? 'bg-[#0284c7] text-[#ffffff]' 
+                : 'bg-[#f5f5f4] text-[#78716c]'
             }`}>
               <Waves className="w-4 h-4" />
             </div>
             <div>
-              <div className={`font-serif-vintage font-bold text-sm ${deliveryMode === 'bottle' ? 'text-[#38bdf8]' : ''}`}>
+              <div className="font-serif-vintage font-bold text-sm text-[#0f172a]">
                 Ocean Drift Bottle
               </div>
-              <div className={`text-xs mt-0.5 ${deliveryMode === 'bottle' ? 'text-[#a5cbe0]' : 'text-[#b8a694]'}`}>
+              <div className="text-xs mt-0.5 text-[#64748b]">
                 Cast into the global ocean. You cannot choose who finds it; discovery may take months or years.
               </div>
             </div>
@@ -450,15 +446,15 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
         {/* Recipient Configuration */}
         {deliveryMode === 'pigeon' ? (
-          <div className="bg-[#191410] border border-[#382c21] rounded-xl p-3.5 mb-4">
+          <div className="bg-[#faf8f5] border border-[#e7e5e4] rounded-xl p-3.5 mb-4 text-[#1c1917]">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs uppercase tracking-wider text-[#a89582] font-medium">
+              <span className="text-xs uppercase tracking-wider text-[#b45309] font-semibold">
                 Pigeon Heading & Recipient
               </span>
               <button
                 type="button"
                 onClick={() => setIsCustomRecipient(!isCustomRecipient)}
-                className="text-xs text-[#d97706] hover:underline font-serif-vintage"
+                className="text-xs text-[#b45309] hover:underline font-serif-vintage cursor-pointer"
               >
                 {isCustomRecipient ? '← Choose from Address Book' : '+ Enter New Remote Recipient'}
               </button>
@@ -471,19 +467,19 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     key={contact.id}
                     type="button"
                     onClick={() => setSelectedContact(contact)}
-                    className={`p-2.5 rounded-lg border text-left text-xs transition-all ${
+                    className={`p-2.5 rounded-lg border text-left text-xs transition-all cursor-pointer ${
                       selectedContact?.id === contact.id
-                        ? 'bg-[#3b2d22] border-[#d97706] text-[#fbf5eb]'
-                        : 'bg-[#231b15] border-[#3c2f24] text-[#a89582] hover:bg-[#2c221a]'
+                        ? 'bg-[#fef3c7] border-[#fde68a] text-[#92400e] shadow-sm'
+                        : 'bg-[#ffffff] border-[#e7e5e4] text-[#44403c] hover:bg-[#f5f5f4]'
                     }`}
                   >
-                    <div className="font-bold text-[#f5ebd7] truncate">{contact.name}</div>
+                    <div className="font-bold text-[#1c1917] truncate">{contact.name}</div>
                     {contact.position && (
-                      <div className="text-[11px] text-[#e0af68] font-serif-vintage truncate mt-0.5">
+                      <div className="text-[11px] text-[#b45309] font-serif-vintage truncate mt-0.5">
                         {contact.position}
                       </div>
                     )}
-                    <div className="text-[10px] text-[#998572] truncate">
+                    <div className="text-[10px] text-[#78716c] truncate">
                       {contact.company ? `${contact.company} · ` : ''}{contact.city}, {contact.region}
                     </div>
                   </button>
@@ -497,14 +493,14 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     placeholder="Recipient Name (e.g. Thomas the Weaver)"
                     value={customRecipientName}
                     onChange={(e) => setCustomRecipientName(e.target.value)}
-                    className="bg-[#241c16] border border-[#48372a] rounded-lg px-3 py-2 text-sm text-[#f5ebd7] placeholder-[#7d6957] focus:outline-none focus:border-[#d97706]"
+                    className="bg-[#ffffff] border border-[#d6d3d1] rounded-lg px-3 py-2 text-sm text-[#1c1917] placeholder-[#a8a29e] focus:outline-none focus:border-[#b45309]"
                   />
                   <input
                     type="text"
                     placeholder="Destination Haven (e.g. Isle of Skye, Scotland)"
                     value={customRecipientCity}
                     onChange={(e) => setCustomRecipientCity(e.target.value)}
-                    className="bg-[#241c16] border border-[#48372a] rounded-lg px-3 py-2 text-sm text-[#f5ebd7] placeholder-[#7d6957] focus:outline-none focus:border-[#d97706]"
+                    className="bg-[#ffffff] border border-[#d6d3d1] rounded-lg px-3 py-2 text-sm text-[#1c1917] placeholder-[#a8a29e] focus:outline-none focus:border-[#b45309]"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -513,46 +509,46 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     placeholder="Career Position / Title (e.g. Master Weaver, Lead Botanist)"
                     value={customRecipientPosition}
                     onChange={(e) => setCustomRecipientPosition(e.target.value)}
-                    className="bg-[#241c16] border border-[#48372a] rounded-lg px-3 py-2 text-xs text-[#f5ebd7] placeholder-[#7d6957] focus:outline-none focus:border-[#d97706]"
+                    className="bg-[#ffffff] border border-[#d6d3d1] rounded-lg px-3 py-2 text-xs text-[#1c1917] placeholder-[#a8a29e] focus:outline-none focus:border-[#b45309]"
                   />
                   <input
                     type="text"
                     placeholder="Guild / Organization (e.g. Hebrides Wool Guild)"
                     value={customRecipientCompany}
                     onChange={(e) => setCustomRecipientCompany(e.target.value)}
-                    className="bg-[#241c16] border border-[#48372a] rounded-lg px-3 py-2 text-xs text-[#f5ebd7] placeholder-[#7d6957] focus:outline-none focus:border-[#d97706]"
+                    className="bg-[#ffffff] border border-[#d6d3d1] rounded-lg px-3 py-2 text-xs text-[#1c1917] placeholder-[#a8a29e] focus:outline-none focus:border-[#b45309]"
                   />
                 </div>
               </div>
             )}
 
             {/* Pigeon Companion & Attire Customization - Live Interactive Pigeon that changes outfit with flight attire */}
-            <div className="mt-3 pt-3 border-t border-[#3c2f24]">
-              <div className="flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-[#201812] to-[#2b1e16] p-3.5 rounded-xl border border-[#48372a] mb-3 shadow-md">
-                <div className="flex-shrink-0 relative bg-[#130d09] border border-[#523d2d] rounded-xl p-2.5 flex items-center justify-center shadow-inner">
+            <div className="mt-3 pt-3 border-t border-[#e7e5e4]">
+              <div className="flex flex-col sm:flex-row items-center gap-4 bg-[#ffffff] p-3.5 rounded-xl border border-[#e7e5e4] mb-3 shadow-sm">
+                <div className="flex-shrink-0 relative bg-[#faf8f5] border border-[#e7e5e4] rounded-xl p-2.5 flex items-center justify-center">
                   <PigeonVisual attireId={pigeonClothes} size="md" animated={true} />
                 </div>
                 <div className="flex-1 text-center sm:text-left space-y-1">
-                  <div className="text-[10px] uppercase tracking-wider text-[#9d8975] font-mono">
+                  <div className="text-[10px] uppercase tracking-wider text-[#78716c] font-mono">
                     Homing Companion Attire
                   </div>
-                  <div className="text-sm font-serif-vintage font-bold text-[#fde68a] flex items-center justify-center sm:justify-start gap-2">
+                  <div className="text-sm font-serif-vintage font-bold text-[#b45309] flex items-center justify-center sm:justify-start gap-2">
                     <span>{pigeonName}</span>
-                    <span className="text-xs font-normal text-[#c4b3a1] bg-[#3a281d] px-2 py-0.5 rounded-full border border-[#523d2d]">
+                    <span className="text-xs font-normal text-[#92400e] bg-[#fef3c7] px-2 py-0.5 rounded-full border border-[#fde68a]">
                       {selectedClothingObj.icon} {selectedClothingObj.name}
                     </span>
                   </div>
-                  <p className="text-xs text-[#ded0bf] leading-relaxed">
+                  <p className="text-xs text-[#44403c] leading-relaxed">
                     {selectedClothingObj.description}
                   </p>
-                  <p className="text-[11px] text-[#a89582] italic pt-0.5">
+                  <p className="text-[11px] text-[#78716c] italic pt-0.5">
                     Select any flight attire below to change its outfit in real-time.
                   </p>
                 </div>
               </div>
 
               <div>
-                <span className="text-[11px] uppercase tracking-wider text-[#a89582] block mb-1.5 font-medium">
+                <span className="text-[11px] uppercase tracking-wider text-[#78716c] block mb-1.5 font-medium">
                   Select Pigeon Flight Attire:
                 </span>
                 <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
@@ -563,8 +559,8 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                       onClick={() => setPigeonClothes(opt.id)}
                       className={`p-2 rounded-lg border text-center transition-all flex flex-col items-center justify-center cursor-pointer ${
                         pigeonClothes === opt.id
-                          ? 'bg-[#3d2d20] border-[#d97706] text-[#fef9f3] shadow-md ring-1 ring-[#d97706]'
-                          : 'bg-[#1e1712] border-[#36291e] text-[#a89582] hover:bg-[#281e17] hover:text-[#ded0bf]'
+                          ? 'bg-[#fef3c7] border-[#fde68a] text-[#92400e] shadow-sm ring-1 ring-[#b45309]'
+                          : 'bg-[#ffffff] border-[#e7e5e4] text-[#57534e] hover:bg-[#faf8f5] hover:text-[#1c1917]'
                       }`}
                     >
                       <span className="text-lg mb-0.5">{opt.icon}</span>
@@ -577,37 +573,34 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
           </div>
         ) : (
-          <div className="bg-[#091a27] border border-[#1b4360] rounded-xl p-3.5 mb-4 shadow-[inset_0_1px_2px_rgba(56,189,248,0.15)] relative overflow-hidden">
-            {/* Soft wave glow overlay */}
-            <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-[#0284c7]/10 rounded-full blur-2xl pointer-events-none" />
-
+          <div className="bg-[#f0f9ff] border border-[#bae6fd] rounded-xl p-3.5 mb-4 relative overflow-hidden text-[#0f172a]">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
               <div>
-                <span className="text-xs uppercase tracking-wider text-[#38bdf8] font-semibold block flex items-center gap-1.5">
+                <span className="text-xs uppercase tracking-wider text-[#0284c7] font-semibold flex items-center gap-1.5">
                   <Waves className="w-3.5 h-3.5" />
                   Bottle Provenance & Oceanic Gyres
                 </span>
-                <p className="text-xs text-[#9fc0d4] font-serif-vintage mt-0.5">
+                <p className="text-xs text-[#475569] font-serif-vintage mt-0.5">
                   Your bottle will enter the global ocean currents. You can track its live coordinates until it is drawn ashore.
                 </p>
               </div>
 
               {/* Anonymous vs Signed Toggle */}
-              <label className="flex items-center gap-2 cursor-pointer text-xs text-[#c6e6f5] bg-[#0d2638] px-2.5 py-1 rounded-lg border border-[#1c4b6c] hover:border-[#38bdf8] transition-colors">
+              <label className="flex items-center gap-2 cursor-pointer text-xs text-[#0369a1] bg-[#ffffff] px-2.5 py-1 rounded-lg border border-[#bae6fd] hover:border-[#0284c7] transition-colors">
                 <input
                   type="checkbox"
                   checked={isAnonymousBottle}
                   onChange={(e) => setIsAnonymousBottle(e.target.checked)}
-                  className="rounded border-[#1f5379] bg-[#071926] text-[#0284c7] focus:ring-0"
+                  className="rounded border-[#7dd3fc] bg-[#ffffff] text-[#0284c7] focus:ring-0"
                 />
                 <span>Cast Anonymously</span>
               </label>
             </div>
 
             {/* Bottle Customization: Color */}
-            <div className="mt-3 pt-3 border-t border-[#163850] relative z-10">
+            <div className="mt-3 pt-3 border-t border-[#bae6fd] relative z-10">
               <div>
-                <span className="text-[11px] uppercase tracking-wider text-[#7eaec7] block mb-1.5 font-medium">
+                <span className="text-[11px] uppercase tracking-wider text-[#0369a1] block mb-1.5 font-medium">
                   Custom Sea-Glass Bottle Tint:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -616,13 +609,13 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                       key={col.id}
                       type="button"
                       onClick={() => setBottleColor(col.hex)}
-                      className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border transition-all ${
+                      className={`flex items-center gap-1.5 px-2 py-1 rounded-md text-xs border transition-all cursor-pointer ${
                         bottleColor === col.hex
-                          ? 'bg-[#0f344d] text-[#f0f9ff] border-[#38bdf8] font-medium shadow-[0_0_10px_rgba(56,189,248,0.3)]'
-                          : 'bg-[#0c2233] text-[#86acc2] border-[#183d59] hover:bg-[#112d44]'
+                          ? 'bg-[#ffffff] text-[#0369a1] border-[#0284c7] font-bold shadow-sm ring-1 ring-[#0284c7]'
+                          : 'bg-[#ffffff] text-[#475569] border-[#bae6fd] hover:bg-[#e0f2fe]'
                       }`}
                     >
-                      <span className="w-2.5 h-2.5 rounded-full ring-1 ring-white/30" style={{ backgroundColor: col.hex }} />
+                      <span className="w-2.5 h-2.5 rounded-full ring-1 ring-black/10" style={{ backgroundColor: col.hex }} />
                       <span>{col.name}</span>
                     </button>
                   ))}
@@ -631,8 +624,8 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
             </div>
 
             {/* Keepsake item attachment */}
-            <div className="mt-3 pt-3 border-t border-[#163850] relative z-10">
-              <span className="text-[11px] uppercase tracking-wider text-[#7eaec7] block mb-1.5 font-medium">
+            <div className="mt-3 pt-3 border-t border-[#bae6fd] relative z-10">
+              <span className="text-[11px] uppercase tracking-wider text-[#0369a1] block mb-1.5 font-medium">
                 Enclose a Tangible Keepsake in the Bottle
               </span>
               <div className="flex flex-wrap gap-2">
@@ -641,10 +634,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     key={item.id}
                     type="button"
                     onClick={() => setSelectedKeepsake(selectedKeepsake?.id === item.id ? null : item)}
-                    className={`px-2.5 py-1 rounded-lg text-xs border transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-xs border transition-all cursor-pointer ${
                       selectedKeepsake?.id === item.id
-                        ? 'bg-[#0b405e] text-[#e0f2fe] border-[#38bdf8] shadow-[0_0_12px_rgba(56,189,248,0.35)]'
-                        : 'bg-[#0c2233] text-[#86acc2] border-[#183d59] hover:bg-[#112d44]'
+                        ? 'bg-[#0284c7] text-[#ffffff] border-[#0284c7] shadow-sm font-medium'
+                        : 'bg-[#ffffff] text-[#0369a1] border-[#bae6fd] hover:bg-[#e0f2fe]'
                     }`}
                   >
                     ✦ {item.name}
@@ -652,37 +645,37 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                 ))}
               </div>
               {selectedKeepsake && (
-                <p className="text-[11px] italic text-[#8ec0d9] mt-1.5 font-serif-vintage">
+                <p className="text-[11px] italic text-[#0369a1] mt-1.5 font-serif-vintage">
                   {selectedKeepsake.lore}
                 </p>
               )}
             </div>
 
             {/* Career Position & Industry Targeting */}
-            <div className="mt-3 pt-3 border-t border-[#163850] relative z-10">
+            <div className="mt-3 pt-3 border-t border-[#bae6fd] relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                 <div className="flex items-center gap-2">
-                  <Briefcase className="w-4 h-4 text-[#38bdf8]" />
-                  <span className="text-xs uppercase tracking-wider text-[#7eaec7] font-semibold">
+                  <Briefcase className="w-4 h-4 text-[#0284c7]" />
+                  <span className="text-xs uppercase tracking-wider text-[#0369a1] font-semibold">
                     Career Position & Industry Targeting
                   </span>
                 </div>
                 {targetIndustry !== 'Open to All Professions' && (
-                  <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#0284c7]/25 border border-[#38bdf8]/60 text-[#bae6fd] font-mono self-start sm:self-auto flex items-center gap-1.5 shadow-[0_0_10px_rgba(56,189,248,0.25)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-ping" />
+                  <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-[#e0f2fe] border border-[#7dd3fc] text-[#0369a1] font-mono self-start sm:self-auto flex items-center gap-1.5 font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0284c7] animate-ping" />
                     Targeted Drift Active
                   </span>
                 )}
               </div>
 
-              <p className="text-xs text-[#9fc0d4] font-serif-vintage mb-3 leading-relaxed">
+              <p className="text-xs text-[#475569] font-serif-vintage mb-3 leading-relaxed">
                 Filter the ocean currents by trade. Only verified professionals in your designated industry or career position whose coastal stations monitor the tideline will be permitted to discover and pull the cork on this bottle.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Industry Selector */}
                 <div>
-                  <label className="text-[11px] uppercase tracking-wider text-[#7eaec7] block mb-1 font-medium">
+                  <label className="text-[11px] uppercase tracking-wider text-[#0369a1] block mb-1 font-medium">
                     Target Industry / Discipline:
                   </label>
                   <select
@@ -691,7 +684,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                       setTargetIndustry(e.target.value);
                       setTargetPosition('');
                     }}
-                    className="w-full bg-[#081a28] border border-[#1b4360] rounded-lg px-3 py-2 text-xs text-[#f0f9ff] focus:outline-none focus:border-[#38bdf8] cursor-pointer shadow-sm"
+                    className="w-full bg-[#ffffff] border border-[#bae6fd] rounded-lg px-3 py-2 text-xs text-[#0f172a] focus:outline-none focus:border-[#0284c7] cursor-pointer shadow-sm"
                   >
                     <option value="Open to All Professions">Open to All Professions (Unrestricted Drift)</option>
                     {CAREER_INDUSTRIES.map((ind) => (
@@ -704,7 +697,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
                 {/* Specific Position / Role */}
                 <div>
-                  <label className="text-[11px] uppercase tracking-wider text-[#7eaec7] block mb-1 font-medium">
+                  <label className="text-[11px] uppercase tracking-wider text-[#0369a1] block mb-1 font-medium">
                     Specific Career Position / Role (Optional):
                   </label>
                   <input
@@ -712,7 +705,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     placeholder={targetIndustry === 'Open to All Professions' ? 'e.g. Any wanderer (or type role)' : 'e.g. Herbarium Botanist, Archival Historian'}
                     value={targetPosition}
                     onChange={(e) => setTargetPosition(e.target.value)}
-                    className="w-full bg-[#081a28] border border-[#1b4360] rounded-lg px-3 py-2 text-xs text-[#f0f9ff] placeholder-[#557b91] focus:outline-none focus:border-[#38bdf8] shadow-sm"
+                    className="w-full bg-[#ffffff] border border-[#bae6fd] rounded-lg px-3 py-2 text-xs text-[#0f172a] placeholder-[#94a3b8] focus:outline-none focus:border-[#0284c7] shadow-sm"
                   />
                 </div>
               </div>
@@ -720,7 +713,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
               {/* Quick suggestions when industry is chosen */}
               {targetIndustry !== 'Open to All Professions' && CAREER_POSITIONS_BY_INDUSTRY[targetIndustry] && (
                 <div className="mt-2.5">
-                  <span className="text-[10px] uppercase text-[#6f9eb8] block mb-1 font-mono">
+                  <span className="text-[10px] uppercase text-[#0369a1] block mb-1 font-mono">
                     Suggested positions in this field:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -729,10 +722,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                         key={pos}
                         type="button"
                         onClick={() => setTargetPosition(pos)}
-                        className={`text-[11px] px-2 py-0.5 rounded-md border transition-all ${
+                        className={`text-[11px] px-2 py-0.5 rounded-md border transition-all cursor-pointer ${
                           targetPosition === pos
-                            ? 'bg-[#0284c7] text-white border-[#38bdf8] font-medium shadow-[0_0_8px_rgba(56,189,248,0.4)]'
-                            : 'bg-[#092235] text-[#8cb2c7] border-[#183f5c] hover:text-[#dff1fa] hover:bg-[#0f2e46]'
+                            ? 'bg-[#0284c7] text-white border-[#0284c7] font-medium shadow-sm'
+                            : 'bg-[#ffffff] text-[#0369a1] border-[#bae6fd] hover:bg-[#e0f2fe]'
                         }`}
                       >
                         {pos}
@@ -744,21 +737,21 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
               {/* Informational badge regarding matching professionals */}
               {targetIndustry !== 'Open to All Professions' ? (
-                <div className="mt-3 p-2.5 rounded-lg bg-[#061825] border border-[#1b4a6b] flex items-start gap-2.5 shadow-sm">
-                  <div className="w-5 h-5 rounded-full bg-[#0e3752] text-[#38bdf8] flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                <div className="mt-3 p-2.5 rounded-lg bg-[#ffffff] border border-[#bae6fd] flex items-start gap-2.5 shadow-sm">
+                  <div className="w-5 h-5 rounded-full bg-[#e0f2fe] text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                     ⚓
                   </div>
-                  <div className="text-[11px] font-serif-vintage leading-relaxed text-[#a6ccde]">
-                    <span className="text-[#38bdf8] font-semibold">Tidal Guidance Filter: </span>
+                  <div className="text-[11px] font-serif-vintage leading-relaxed text-[#334155]">
+                    <span className="text-[#0284c7] font-semibold">Tidal Guidance Filter: </span>
                     {targetPosition ? (
-                      <>Only professionals matching <strong className="text-[#e0f2fe] font-semibold">{targetPosition}</strong> within <em>{targetIndustry}</em> will have clearance to pull this wax seal when it washes ashore.</>
+                      <>Only professionals matching <strong className="text-[#0f172a] font-semibold">{targetPosition}</strong> within <em>{targetIndustry}</em> will have clearance to pull this wax seal when it washes ashore.</>
                     ) : (
-                      <>Only scholars and practitioners in <strong className="text-[#e0f2fe] font-semibold">{targetIndustry}</strong> will be alerted when this bottle drifts into coastal waters.</>
+                      <>Only scholars and practitioners in <strong className="text-[#0f172a] font-semibold">{targetIndustry}</strong> will be alerted when this bottle drifts into coastal waters.</>
                     )}
                   </div>
                 </div>
               ) : (
-                <div className="mt-2 text-[11px] text-[#6d9cb5] font-serif-vintage italic">
+                <div className="mt-2 text-[11px] text-[#0369a1] font-serif-vintage italic">
                   ✦ Open drift: Anyone walking the beachcomber shoreline or coastal trails may discover this bottle.
                 </div>
               )}
@@ -769,11 +762,11 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
         {/* AI Helper Bar */}
         <div className={`flex flex-wrap items-center justify-between gap-2 mb-3 px-3 py-2 rounded-lg border transition-colors ${
           isBottle 
-            ? 'bg-[#091d2c] border-[#184261] text-[#bfe0f2]' 
-            : 'bg-[#191410] border-[#382b1f] text-[#d4c3b0]'
+            ? 'bg-[#f0f9ff] border-[#bae6fd] text-[#0369a1]' 
+            : 'bg-[#faf8f5] border-[#e7e5e4] text-[#1c1917]'
         }`}>
           <div className="flex items-center gap-2">
-            <Sparkles className={`w-4 h-4 ${isBottle ? 'text-[#38bdf8]' : 'text-[#e0af68]'}`} />
+            <Sparkles className={`w-4 h-4 ${isBottle ? 'text-[#0284c7]' : 'text-[#b45309]'}`} />
             <span className="text-xs font-serif-vintage">Peer Career Advisor & Reach-out Mentor:</span>
           </div>
 
@@ -783,8 +776,8 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
               onClick={() => setShowAiAssistant(!showAiAssistant)}
               className={`text-xs px-2.5 py-1 rounded-md border transition-colors font-medium flex items-center gap-1.5 cursor-pointer ${
                 isBottle 
-                  ? 'bg-[#0f2e46] hover:bg-[#163f5e] text-[#38bdf8] border-[#1d527a]' 
-                  : 'bg-[#2d2219] hover:bg-[#3b2d21] text-[#e0af68] border-[#4f3d2f]'
+                  ? 'bg-[#ffffff] hover:bg-[#e0f2fe] text-[#0284c7] border-[#bae6fd]' 
+                  : 'bg-[#ffffff] hover:bg-[#f5f5f4] text-[#b45309] border-[#fde68a]'
               }`}
             >
               <span>💼</span>
@@ -795,23 +788,23 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
         {/* Peer Career Advisor / Letter Assistant Drawer */}
         {showAiAssistant && (
-          <div className={`p-4 rounded-xl mb-4 text-xs space-y-3.5 shadow-xl animate-in fade-in duration-200 border ${
+          <div className={`p-4 rounded-xl mb-4 text-xs space-y-3.5 shadow-md animate-in fade-in duration-200 border ${
             isBottle 
-              ? 'bg-[#071927] border-[#1b486c] text-[#d4e7f5]' 
-              : 'bg-[#241c16] border-[#5a4332] text-[#ded0bf]'
+              ? 'bg-[#f0f9ff] border-[#bae6fd] text-[#0f172a]' 
+              : 'bg-[#faf8f5] border-[#e7e5e4] text-[#1c1917]'
           }`}>
             <div className={`flex items-center justify-between border-b pb-2.5 ${
-              isBottle ? 'border-[#153a57]' : 'border-[#3d2e22]'
+              isBottle ? 'border-[#bae6fd]' : 'border-[#e7e5e4]'
             }`}>
               <div className="flex items-center gap-2">
-                <Sparkles className={`w-4 h-4 ${isBottle ? 'text-[#38bdf8]' : 'text-[#e0af68]'}`} />
-                <span className={`font-bold text-sm font-serif-vintage ${isBottle ? 'text-[#f0f9ff]' : 'text-[#f5ebd7]'}`}>
+                <Sparkles className={`w-4 h-4 ${isBottle ? 'text-[#0284c7]' : 'text-[#b45309]'}`} />
+                <span className={`font-bold text-sm font-serif-vintage ${isBottle ? 'text-[#0f172a]' : 'text-[#1c1917]'}`}>
                   Peer Career Advisor & Mentor
                 </span>
                 <span className={`text-[10px] px-2 py-0.5 rounded-full font-mono border ${
                   isBottle 
-                    ? 'bg-[#0c2f47] text-[#7dd3fc] border-[#1e5880]' 
-                    : 'bg-[#3b2d21] text-[#93c5fd] border-[#4d3a2b]'
+                    ? 'bg-[#e0f2fe] text-[#0369a1] border-[#7dd3fc]' 
+                    : 'bg-[#fef3c7] text-[#92400e] border-[#fde68a]'
                 }`}>
                   {deliveryMode === 'pigeon' ? '🕊️ Pigeon: Targeted Reach-out' : '🍾 Bottle: Open Cold Outreach'}
                 </span>
@@ -819,21 +812,21 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowAiAssistant(false)}
-                className={`text-sm p-1 rounded transition-colors ${
-                  isBottle ? 'text-[#7ea5bd] hover:text-[#f0f9ff] hover:bg-[#0f2e46]' : 'text-[#9e8b79] hover:text-[#f5ebd7] hover:bg-[#34261b]'
+                className={`text-sm p-1 rounded transition-colors cursor-pointer ${
+                  isBottle ? 'text-[#64748b] hover:text-[#0f172a] hover:bg-[#e0f2fe]' : 'text-[#78716c] hover:text-[#1c1917] hover:bg-[#f5f5f4]'
                 }`}
               >
                 ✕
               </button>
             </div>
 
-            <p className={`text-xs leading-relaxed ${isBottle ? 'text-[#a2c5db]' : 'text-[#c2b2a1]'}`}>
+            <p className={`text-xs leading-relaxed ${isBottle ? 'text-[#475569]' : 'text-[#57534e]'}`}>
               Share the context of your situation and desired outcome (e.g. asking for a 15-min coffee chat, seeking guidance on a specific role, or sending a sincere follow-up/apology for missing a meeting). The mentor will draft an authentic message in your voice that you can freely edit.
             </p>
 
             {/* Context & Situation Input */}
             <div>
-              <label className={`block text-[11px] font-semibold mb-1 ${isBottle ? 'text-[#e0f2fe]' : 'text-[#e8dac9]'}`}>
+              <label className={`block text-[11px] font-semibold mb-1 ${isBottle ? 'text-[#0369a1]' : 'text-[#1c1917]'}`}>
                 Context & Situation / Desired Outcome:
               </label>
               <textarea
@@ -841,18 +834,18 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                 placeholder="E.g., I want to connect with a senior product designer at Stripe to ask about transition from UX research. Want to ask for a brief 15-min chat next week, without sounding overly flattering or pushy."
                 value={aiPrompt}
                 onChange={(e) => setAiPrompt(e.target.value)}
-                className={`w-full rounded-lg p-2.5 text-xs resize-none leading-relaxed focus:outline-none ${
+                className={`w-full rounded-lg p-2.5 text-xs resize-none leading-relaxed focus:outline-none bg-[#ffffff] border ${
                   isBottle 
-                    ? 'bg-[#051421] border border-[#1b486c] text-[#f0f9ff] placeholder-[#557b91] focus:border-[#38bdf8]' 
-                    : 'bg-[#17120e] border border-[#48372b] text-[#f5ebd7] placeholder-[#7d6957] focus:border-[#d97706]'
+                    ? 'border-[#bae6fd] text-[#0f172a] placeholder-[#94a3b8] focus:border-[#0284c7]' 
+                    : 'border-[#d6d3d1] text-[#1c1917] placeholder-[#a8a29e] focus:border-[#b45309]'
                 }`}
               />
             </div>
 
             {/* Quick Context Presets */}
             <div>
-              <span className={`text-[10px] uppercase tracking-wider block mb-1.5 font-medium ${isBottle ? 'text-[#7ea5bd]' : 'text-[#9d8975]'}`}>
-                Quick Scenarios (Click to load):
+              <span className={`text-xs uppercase tracking-wider block mb-1.5 font-semibold ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>
+                Quick Scenarios
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {(isBottle ? [
@@ -870,10 +863,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                     key={preset.label}
                     type="button"
                     onClick={() => setAiPrompt(preset.text)}
-                    className={`px-2.5 py-1 rounded-md text-[11px] transition-colors border ${
+                    className={`px-2.5 py-1 rounded-md text-[11px] transition-colors border cursor-pointer ${
                       isBottle 
-                        ? 'bg-[#092235] hover:bg-[#0f344f] text-[#aed4ec] hover:text-[#f0f9ff] border-[#184261]' 
-                        : 'bg-[#19130e] hover:bg-[#322419] text-[#c9b8a3] hover:text-[#fef9f3] border-[#3e2e21]'
+                        ? 'bg-[#ffffff] hover:bg-[#e0f2fe] text-[#0369a1] border-[#bae6fd]' 
+                        : 'bg-[#ffffff] hover:bg-[#faf8f5] text-[#44403c] border-[#e7e5e4]'
                     }`}
                   >
                     {preset.label}
@@ -883,28 +876,28 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
             </div>
 
             {aiError && (
-              <div className="p-2.5 rounded-lg bg-[#3b1c1c] border border-[#7f2d2d] text-[#fca5a5] text-xs">
+              <div className="p-2.5 rounded-lg bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] text-xs">
                 {aiError}
               </div>
             )}
 
             {/* Advisor Feedback & Alternative Phrasing display when present */}
             {(mentorFeedback || alternativePhrasing) && (
-              <div className={`p-3 rounded-lg space-y-2 text-xs border ${
-                isBottle ? 'bg-[#051522] border-[#184261]' : 'bg-[#1c1611] border-[#453323]'
+              <div className={`p-3 rounded-lg space-y-2 text-xs border bg-[#ffffff] ${
+                isBottle ? 'border-[#bae6fd]' : 'border-[#e7e5e4]'
               }`}>
                 {mentorFeedback && (
                   <div>
-                    <span className={`font-semibold flex items-center gap-1.5 ${isBottle ? 'text-[#38bdf8]' : 'text-[#f5ebd7]'}`}>
+                    <span className={`font-semibold flex items-center gap-1.5 ${isBottle ? 'text-[#0284c7]' : 'text-[#b45309]'}`}>
                       💡 Mentor Note:
                     </span>
-                    <p className={`mt-0.5 leading-relaxed ${isBottle ? 'text-[#c2dfef]' : 'text-[#c7b7a5]'}`}>{mentorFeedback}</p>
+                    <p className={`mt-0.5 leading-relaxed ${isBottle ? 'text-[#334155]' : 'text-[#44403c]'}`}>{mentorFeedback}</p>
                   </div>
                 )}
                 {alternativePhrasing && (
-                  <div className={`pt-1.5 border-t ${isBottle ? 'border-[#13324a]' : 'border-[#312317]'}`}>
-                    <span className="font-semibold text-[#93c5fd]">Alternative Wording:</span>
-                    <p className="text-[#a5c2d6] italic mt-0.5">"{alternativePhrasing}"</p>
+                  <div className={`pt-1.5 border-t ${isBottle ? 'border-[#e0f2fe]' : 'border-[#e7e5e4]'}`}>
+                    <span className="font-semibold text-[#0284c7]">Alternative Wording:</span>
+                    <p className="text-[#334155] italic mt-0.5">"{alternativePhrasing}"</p>
                   </div>
                 )}
               </div>
@@ -912,17 +905,17 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
             {/* Controls: Tone & Submit */}
             <div className={`flex flex-wrap items-center justify-between gap-3 pt-1 border-t ${
-              isBottle ? 'border-[#153a57]' : 'border-[#34261c]'
+              isBottle ? 'border-[#bae6fd]' : 'border-[#e7e5e4]'
             }`}>
               <div className="flex items-center gap-2">
-                <span className={`text-xs font-medium ${isBottle ? 'text-[#7ea5bd]' : 'text-[#a89684]'}`}>Desired Tone:</span>
+                <span className={`text-xs font-medium ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>Desired Tone:</span>
                 <select
                   value={aiTone}
                   onChange={(e) => setAiTone(e.target.value)}
-                  className={`rounded-lg px-2.5 py-1.5 text-xs focus:outline-none ${
+                  className={`rounded-lg px-2.5 py-1.5 text-xs focus:outline-none bg-[#ffffff] border ${
                     isBottle 
-                      ? 'bg-[#051421] border border-[#1b486c] text-[#d4e7f5] focus:border-[#38bdf8]' 
-                      : 'bg-[#17120e] border border-[#48372b] text-[#ded0bf] focus:border-[#d97706]'
+                      ? 'border-[#bae6fd] text-[#0f172a] focus:border-[#0284c7]' 
+                      : 'border-[#d6d3d1] text-[#1c1917] focus:border-[#b45309]'
                   }`}
                 >
                   <option value="concise & professional">Concise & Professional (Direct, respectful of time)</option>
@@ -937,10 +930,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                   type="button"
                   disabled={isAiLoading}
                   onClick={handleGenerateLetterWithAi}
-                  className={`px-4 py-2 text-[#fef9f3] rounded-lg font-serif-vintage disabled:opacity-50 flex items-center gap-2 shadow-md transition-all cursor-pointer ${
+                  className={`px-4 py-2 text-[#ffffff] rounded-lg font-serif-vintage disabled:opacity-50 flex items-center gap-2 shadow-md transition-all cursor-pointer ${
                     isBottle 
-                      ? 'bg-gradient-to-r from-[#0284c7] to-[#0369a1] hover:brightness-110 border border-[#38bdf8] shadow-[0_0_15px_rgba(2,132,199,0.4)]' 
-                      : 'bg-[#8a3318] hover:bg-[#a64022] border border-[#b44828]'
+                      ? 'bg-gradient-to-r from-[#0284c7] to-[#0369a1] hover:brightness-105 border border-[#38bdf8]' 
+                      : 'bg-gradient-to-r from-[#991b1b] to-[#7f1d1d] hover:brightness-105 border border-[#b91c1c]'
                   }`}
                 >
                   {isAiLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
@@ -1012,21 +1005,21 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
         {/* Stationery Controls Bar */}
         <div className={`grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t text-xs ${
-          isBottle ? 'border-[#15344a]' : 'border-[#382b20]'
+          isBottle ? 'border-[#bae6fd]' : 'border-[#e7e5e4]'
         }`}>
           
           {/* Paper Type */}
           <div>
-            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#7ea5bd]' : 'text-[#a89582]'}`}>
+            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>
               Paper Surface:
             </label>
             <select
               value={paperStyle}
               onChange={(e) => handlePaperStyleChange(e.target.value as PaperStyle)}
-              className={`w-full rounded-lg px-2.5 py-1.5 focus:outline-none ${
+              className={`w-full rounded-lg px-2.5 py-1.5 focus:outline-none bg-[#ffffff] border ${
                 isBottle 
-                  ? 'bg-[#091d2c] border border-[#184261] text-[#e0f2fe] focus:border-[#38bdf8]' 
-                  : 'bg-[#191410] border border-[#3e3024] text-[#ded0bf] focus:border-[#d97706]'
+                  ? 'border-[#bae6fd] text-[#0f172a] focus:border-[#0284c7]' 
+                  : 'border-[#d6d3d1] text-[#1c1917] focus:border-[#b45309]'
               }`}
             >
               {isBottle && <option value="ocean-drift">Ocean Drift Vellum</option>}
@@ -1043,16 +1036,16 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
           {/* Typography */}
           <div>
-            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#7ea5bd]' : 'text-[#a89582]'}`}>
+            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>
               Handwriting Script:
             </label>
             <select
               value={fontStyle}
               onChange={(e) => setFontStyle(e.target.value as FontStyle)}
-              className={`w-full rounded-lg px-2.5 py-1.5 focus:outline-none ${
+              className={`w-full rounded-lg px-2.5 py-1.5 focus:outline-none bg-[#ffffff] border ${
                 isBottle 
-                  ? 'bg-[#091d2c] border border-[#184261] text-[#e0f2fe] focus:border-[#38bdf8]' 
-                  : 'bg-[#191410] border border-[#3e3024] text-[#ded0bf] focus:border-[#d97706]'
+                  ? 'border-[#bae6fd] text-[#0f172a] focus:border-[#0284c7]' 
+                  : 'border-[#d6d3d1] text-[#1c1917] focus:border-[#b45309]'
               }`}
             >
               <option value="cursive">Cursive Quill (Caveat)</option>
@@ -1063,7 +1056,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
           {/* Sealing Wax Color */}
           <div>
-            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#7ea5bd]' : 'text-[#a89582]'}`}>
+            <label className={`block mb-1 font-medium ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>
               Sealing Wax:
             </label>
             <div className="flex items-center gap-1.5 py-1">
@@ -1072,8 +1065,8 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
                   key={col.hex}
                   type="button"
                   onClick={() => setSealColor(col.hex)}
-                  className={`w-6 h-6 rounded-full border-2 transition-transform ${
-                    sealColor === col.hex ? 'scale-125 border-white shadow-md ring-1 ring-sky-300/50' : 'border-transparent opacity-80 hover:opacity-100'
+                  className={`w-6 h-6 rounded-full border-2 transition-transform cursor-pointer ${
+                    sealColor === col.hex ? 'scale-125 border-white shadow-md ring-2 ring-stone-400/50' : 'border-transparent opacity-85 hover:opacity-100'
                   }`}
                   style={{ backgroundColor: col.hex }}
                   title={col.name}
@@ -1086,9 +1079,9 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
         {/* Footer Actions */}
         <div className={`flex items-center justify-between mt-6 pt-4 border-t ${
-          isBottle ? 'border-[#15344a]' : 'border-[#3b2e23]'
+          isBottle ? 'border-[#bae6fd]' : 'border-[#e7e5e4]'
         }`}>
-          <p className={`text-xs font-serif-vintage hidden sm:block ${isBottle ? 'text-[#7ea5bd]' : 'text-[#9d8975]'}`}>
+          <p className={`text-xs font-serif-vintage hidden sm:block ${isBottle ? 'text-[#0369a1]' : 'text-[#78716c]'}`}>
             {deliveryMode === 'pigeon' 
               ? '🕊️ No read receipts. Pigeon arrival time is unknown.' 
               : targetIndustry !== 'Open to All Professions'
@@ -1100,11 +1093,7 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className={`px-4 py-2 rounded-lg text-xs font-serif-vintage transition-colors ${
-                isBottle 
-                  ? 'bg-[#091d2c] hover:bg-[#0f2e46] text-[#9fc0d4] hover:text-[#f0f9ff]' 
-                  : 'bg-[#271f19] hover:bg-[#342921] text-[#c2b2a0]'
-              }`}
+              className="px-4 py-2 rounded-lg text-xs font-serif-vintage bg-[#f5f5f4] hover:bg-[#e7e5e4] text-[#44403c] border border-[#e7e5e4] transition-colors cursor-pointer"
             >
               Discard Draft
             </button>
@@ -1113,10 +1102,10 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
               type="button"
               disabled={!content.trim() || isSealing}
               onClick={handleDispatch}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-serif-vintage font-bold tracking-wide shadow-lg hover:brightness-110 active:scale-95 disabled:opacity-50 transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-serif-vintage font-bold tracking-wide shadow-md hover:brightness-105 active:scale-95 disabled:opacity-50 transition-all cursor-pointer ${
                 isBottle
-                  ? 'bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#0c4a6e] text-[#f0f9ff] border border-[#38bdf8] shadow-[0_0_25px_rgba(2,132,199,0.5)]'
-                  : 'bg-gradient-to-r from-[#8a3318] to-[#5a1c0d] text-[#fef9f3] border border-[#b44828]'
+                  ? 'bg-gradient-to-r from-[#0284c7] to-[#0369a1] text-[#ffffff] border border-[#38bdf8]'
+                  : 'bg-gradient-to-r from-[#991b1b] to-[#7f1d1d] text-[#ffffff] border border-[#b91c1c]'
               }`}
             >
               {isBottle ? <Waves className="w-4 h-4" /> : <Send className="w-4 h-4" />}
@@ -1127,21 +1116,19 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
 
         {/* Wax Pouring & Sealing Overlay Ceremony */}
         {isSealing && (
-          <div className={`absolute inset-0 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center text-center p-6 z-30 ${
-            isBottle ? 'bg-[#040e17]/95 text-[#f0f9ff]' : 'bg-[#171310]/95 text-[#ded0bf]'
-          }`}>
+          <div className="absolute inset-0 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center text-center p-6 z-30 bg-[#ffffff]/95 text-[#1c1917]">
             {sealingStep === 'pouring_wax' && (
               <div className="space-y-4 animate-pulse">
                 <div 
-                  className={`w-16 h-16 rounded-full mx-auto shadow-2xl animate-bounce border-2 ${
-                    isBottle ? 'border-sky-300 shadow-[0_0_30px_rgba(56,189,248,0.5)]' : 'border-amber-200/40'
+                  className={`w-16 h-16 rounded-full mx-auto shadow-xl animate-bounce border-2 ${
+                    isBottle ? 'border-sky-300' : 'border-amber-200'
                   }`}
                   style={{ backgroundColor: sealColor }}
                 />
-                <h3 className={`font-cinzel text-xl ${isBottle ? 'text-[#f0f9ff]' : 'text-[#f5ebd7]'}`}>
+                <h3 className="font-cinzel text-xl text-[#1c1917] font-bold">
                   {isBottle ? 'Securing Bottle with Marine Seal...' : 'Pouring Warm Sealing Wax...'}
                 </h3>
-                <p className={`text-xs font-serif-vintage ${isBottle ? 'text-[#9fc0d4]' : 'text-[#a89582]'}`}>
+                <p className="text-xs font-serif-vintage text-[#78716c]">
                   {isBottle ? 'Sealing cork watertight against ocean breakers and salinity.' : 'Securing parchment with natural pine resin and beeswax.'}
                 </p>
               </div>
@@ -1150,19 +1137,17 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
             {sealingStep === 'stamped' && (
               <div className="space-y-4">
                 <div 
-                  className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center text-white text-3xl font-cinzel font-bold shadow-2xl border-4 ${
-                    isBottle ? 'border-sky-200/60 shadow-[0_0_35px_rgba(56,189,248,0.6)]' : 'border-amber-200/40'
-                  }`}
+                  className="w-20 h-20 rounded-full mx-auto flex items-center justify-center text-white text-3xl font-cinzel font-bold shadow-xl border-4 border-white"
                   style={{ backgroundColor: sealColor }}
                 >
                   {deliveryMode === 'bottle' ? '🍾' : '🕊️'}
                 </div>
-                <h3 className={`font-cinzel text-2xl ${isBottle ? 'text-[#f0f9ff]' : 'text-[#f5ebd7]'}`}>
+                <h3 className="font-cinzel text-2xl text-[#1c1917] font-bold">
                   {deliveryMode === 'bottle'
                     ? `Bottle Corked & Sealed`
                     : `Affixed with the Carrier Seal`}
                 </h3>
-                <p className={`text-sm font-serif-vintage ${isBottle ? 'text-[#bfe0f2]' : 'text-[#d4c5b4]'}`}>
+                <p className="text-sm font-serif-vintage text-[#57534e]">
                   {isBottle 
                     ? 'The wax seal has hardened against the brine. Preparing to cast.' 
                     : 'The seal has set firm into deep wax. Preparing for departure.'}
@@ -1174,17 +1159,17 @@ export const WriteLetterModal: React.FC<WriteLetterModalProps> = ({
               <div className="space-y-4 animate-fadeIn">
                 <div className={`p-4 rounded-full inline-block mx-auto text-3xl border ${
                   isBottle 
-                    ? 'bg-[#0b283d] border-[#1b557b] text-[#38bdf8] shadow-[0_0_25px_rgba(56,189,248,0.4)]' 
-                    : 'bg-[#3b2d22] border-[#5c4635] text-[#e0af68]'
+                    ? 'bg-[#e0f2fe] border-[#bae6fd] text-[#0284c7]' 
+                    : 'bg-[#fef3c7] border-[#fde68a] text-[#b45309]'
                 }`}>
                   {deliveryMode === 'pigeon' ? selectedClothingObj.icon : '🍾'}
                 </div>
-                <h3 className={`font-cinzel text-2xl ${isBottle ? 'text-[#f0f9ff]' : 'text-[#f5ebd7]'}`}>
+                <h3 className="font-cinzel text-2xl text-[#1c1917] font-bold">
                   {deliveryMode === 'pigeon' 
                     ? `Pigeon "${pigeonName}" Takes Flight` 
                     : `Cast Adrift in ${selectedGlassObj.name} Glass`}
                 </h3>
-                <p className={`text-sm font-serif-vintage max-w-md mx-auto leading-relaxed ${isBottle ? 'text-[#bfe0f2]' : 'text-[#d4c5b4]'}`}>
+                <p className="text-sm font-serif-vintage max-w-md mx-auto leading-relaxed text-[#57534e]">
                   {deliveryMode === 'pigeon'
                     ? `Your homing pigeon "${pigeonName}" wearing ${selectedClothingObj.name} has departed toward ${selectedContact?.city || customRecipientCity || 'the horizon'}. May gentle winds guide its wings through shifting skies.`
                     : `The ${selectedGlassObj.name.toLowerCase()} glass bottle bobs into the tidal breakers, caught by the great oceanic gyres. When found, it will slip quietly from your map.`}

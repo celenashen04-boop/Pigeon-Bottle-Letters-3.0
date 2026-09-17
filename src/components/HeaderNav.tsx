@@ -150,7 +150,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             <button
               onClick={() => setIsSeasonModalOpen(true)}
               className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#27211b] border border-[#42362b] text-xs text-[#d1bfab] hover:border-[#635140] transition-colors"
-              title="Click to view global seasonal conditions"
+              title="Global seasonal conditions & wind patterns"
             >
               <Wind className="w-3.5 h-3.5 text-[#e0af68]" />
               <span className="font-serif-vintage truncate max-w-[120px]">

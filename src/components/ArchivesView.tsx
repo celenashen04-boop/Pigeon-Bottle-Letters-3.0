@@ -351,9 +351,9 @@ export const ArchivesView: React.FC<ArchivesViewProps> = ({
                     )}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-xs font-serif-vintage text-[#8c7967] space-y-2">
+                  <div className="text-center py-8 text-sm font-serif-vintage text-[#8c7967] space-y-2">
                     <BookOpen className="w-8 h-8 text-[#5c4736] mx-auto" />
-                    <p>Click "Summarize Chronicle" to synthesize your letters with {selectedContactForSummary.name} into an evocative retrospective.</p>
+                    <p>Synthesize correspondence with {selectedContactForSummary.name} into an evocative retrospective chronicle.</p>
                   </div>
                 )}
               </div>

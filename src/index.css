@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    font-size: 18.66px; /* 14pt minimum baseline for enhanced readability */
+  }
+
   body {
-    background-color: #171412;
-    color: #ded0bf;
+    background-color: #ffffff;
+    color: #292524;
+    font-size: 1rem; /* 14pt minimum */
     font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
   }
 }
 
@@ -13,6 +19,25 @@
 /* Non-header vintage / body text - uses clean, legible sans-serif */
 .font-serif-vintage {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Enforce 14pt (18.66px) minimum readability floor */
+.text-\[9px\],
+.text-\[10px\],
+.text-\[11px\],
+.text-xs {
+  font-size: 14pt !important;
+  line-height: 1.5 !important;
+}
+
+.text-sm {
+  font-size: 15pt !important;
+  line-height: 1.5 !important;
+}
+
+.text-base {
+  font-size: 16pt !important;
+  line-height: 1.6 !important;
 }
 
 /* Classical Monastic serif option for letter paper writing */

@@ -545,9 +545,19 @@ export function dispatchCarrierPigeon(
   recipientPosition?: string
 ): PigeonFlight {
   const currentSeason = SEASONS[loadWorldSeasonIndex()] || SEASONS[0];
-  const baseDays = Math.floor(5 + Math.random() * 10);
-  const minDays = Math.max(3, baseDays - 3);
-  const maxDays = baseDays + 6;
+  const dist = Math.hypot(coords.x - 44, coords.y - 35);
+  // Realistic pigeon travel duration based on distance
+  let durationHours = 8;
+  if (dist < 20) {
+    durationHours = 4 + Math.random() * 4; // 4 to 8 hours for close routes
+  } else if (dist < 50) {
+    durationHours = 12 + Math.random() * 12; // 12 to 24 hours (approx 0.5 to 1 day)
+  } else {
+    durationHours = 24 + Math.random() * 36; // 1 to 2.5 days for cross-ocean/long routes
+  }
+  const baseDays = Number((durationHours / 24).toFixed(2));
+  const minDays = Number((baseDays * 0.8).toFixed(2));
+  const maxDays = Number((baseDays * 1.3).toFixed(2));
   const assignedName = pigeonName?.trim() || getRandomPigeonName();
   const assignedClothes = pigeonClothes || 'aviator_goggles';
 
@@ -562,6 +572,14 @@ export function dispatchCarrierPigeon(
     recipientLocation: city,
   };
 
+  const dispatchTime = Date.now();
+  const dateFormatted = new Date(dispatchTime).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
   const newFlight: PigeonFlight = {
     id: `flight-${Date.now()}`,
     letterId: letter.id,
@@ -575,24 +593,24 @@ export function dispatchCarrierPigeon(
     originCoords: { x: 44, y: 35 },
     destCoords: coords,
     status: 'in_flight',
-    dispatchedAt: Date.now(),
+    dispatchedAt: dispatchTime,
     estimatedMinDays: minDays,
     estimatedMaxDays: maxDays,
     actualDurationDays: baseDays,
     currentDay: 1,
-    progressPercent: 6,
+    progressPercent: 4,
     currentZoneName: 'Departing coastal valley updrafts',
     pigeonName: assignedName,
     pigeonClothes: assignedClothes,
     weatherHistory: [
-      `Dispatched into ${currentSeason.windPattern}`,
+      `Dispatched at ${dateFormatted} into ${currentSeason.windPattern}`,
       'Ascended to cruising altitude of 1,200 ft',
     ],
     waypoints: [
       {
         id: `wp-init-${Date.now()}`,
         locationName: 'Home Coastal Roost',
-        date: 'Day 1',
+        date: dateFormatted,
         description: `Released ${assignedName} with letter capsule secured for ${recipient}${position ? ` (${position})` : ''}.`,
         weatherCondition: 'Clear skies with morning sea breeze',
         coords: { x: 44, y: 35 },
@@ -671,6 +689,141 @@ export function castBottleIntoOcean(
   saveLetters(letters);
 
   return newBottle;
+}
+
+// Real-Time Progression Engine: Synchronizes world state with actual wall-clock elapsed time
+export function syncWorldRealTime(): {
+  pigeonFlights: PigeonFlight[];
+  bottles: DriftBottle[];
+  letters: Letter[];
+  notifications: LetterNotification[];
+  arrivedPigeons: PigeonFlight[];
+  strandedBottles: DriftBottle[];
+  hasChanges: boolean;
+} {
+  const pigeons = loadPigeonFlights();
+  const bottles = loadDriftBottles();
+  const letters = loadLetters();
+  const notifications = loadNotifications();
+  const now = Date.now();
+
+  let hasChanges = false;
+  const arrivedPigeons: PigeonFlight[] = [];
+  const strandedBottles: DriftBottle[] = [];
+
+  // 1. Check Pigeon Flights against real elapsed wall-clock time
+  const updatedPigeons = pigeons.map((pigeon) => {
+    if (pigeon.status !== 'in_flight') return pigeon;
+
+    const dispatchedAt = pigeon.dispatchedAt || now;
+    const elapsedMs = Math.max(0, now - dispatchedAt);
+    const durationMs = Math.max(60000, (pigeon.actualDurationDays || 1) * 24 * 3600 * 1000);
+    const progress = Math.min(100, Math.round((elapsedMs / durationMs) * 100));
+
+    if (progress >= 100) {
+      hasChanges = true;
+      arrivedPigeons.push(pigeon);
+
+      // Mark attached letter as delivered
+      const letterIdx = letters.findIndex((l) => l.id === pigeon.letterId);
+      if (letterIdx !== -1) {
+        letters[letterIdx] = {
+          ...letters[letterIdx],
+          isRead: false,
+        };
+      }
+
+      const isOutgoing = pigeon.sender === 'You';
+      const arrivalDate = new Date(dispatchedAt + durationMs);
+      const notifTime = arrivalDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+
+      // Avoid duplicate notification for same flight
+      const exists = notifications.some((n) => n.flightId === pigeon.id && (n.type === 'letter_delivered' || n.type === 'letter_received'));
+      if (!exists) {
+        notifications.unshift({
+          id: `notif-real-${pigeon.id}-${Date.now()}`,
+          type: isOutgoing ? 'letter_delivered' : 'letter_received',
+          title: isOutgoing 
+            ? `Pigeon "${pigeon.pigeonName || 'Homer'}" Delivered Your Letter` 
+            : `Carrier Pigeon Arrived with Dispatch`,
+          message: isOutgoing
+            ? `Your pigeon "${pigeon.pigeonName || 'Homer'}" has touched down safely in ${pigeon.destinationName} and delivered your letter to ${pigeon.recipient}!`
+            : `A carrier pigeon named "${pigeon.pigeonName || 'Homer'}" arrived at your hearth bearing a dispatch from ${pigeon.sender}!`,
+          timestamp: notifTime,
+          dateNumber: Math.floor(now / 86400000),
+          letterId: pigeon.letterId,
+          flightId: pigeon.id,
+          isRead: false,
+        });
+      }
+
+      return {
+        ...pigeon,
+        progressPercent: 100,
+        status: 'delivered' as const,
+        currentZoneName: `Delivered safely to ${pigeon.destinationName}`,
+        weatherHistory: [
+          ...pigeon.weatherHistory,
+          `Landed softly on the windowsill at ${pigeon.destinationName}`,
+        ],
+      };
+    }
+
+    // Still in flight: update progress if changed
+    if (progress !== pigeon.progressPercent) {
+      hasChanges = true;
+      return {
+        ...pigeon,
+        progressPercent: progress,
+        currentDay: Math.max(1, Math.floor(elapsedMs / (24 * 3600 * 1000)) + 1),
+      };
+    }
+
+    return pigeon;
+  });
+
+  // 2. Check Drift Bottles against real elapsed wall-clock time
+  const updatedBottles = bottles.map((bottle) => {
+    if (bottle.status !== 'drifting' || bottle.isTaken) return bottle;
+
+    const releasedAt = bottle.releasedAt || now;
+    const elapsedDays = Math.max(0, (now - releasedAt) / (24 * 3600 * 1000));
+    const daysFloor = Math.floor(elapsedDays);
+
+    if (daysFloor !== bottle.daysAdrift) {
+      hasChanges = true;
+      const miles = Math.floor(elapsedDays * 24); // ~1 knot drift
+      return {
+        ...bottle,
+        daysAdrift: daysFloor,
+        nauticalMilesTravelled: miles,
+      };
+    }
+
+    return bottle;
+  });
+
+  if (hasChanges) {
+    savePigeonFlights(updatedPigeons);
+    saveDriftBottles(updatedBottles);
+    saveLetters(letters);
+    saveNotifications(notifications);
+  }
+
+  return {
+    pigeonFlights: updatedPigeons,
+    bottles: updatedBottles,
+    letters,
+    notifications,
+    arrivedPigeons,
+    strandedBottles,
+    hasChanges,
+  };
 }
 
 // World Simulation Engine: Advance time by N days

@@ -91,19 +91,15 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
   return (
     <div className="relative w-full bg-[#101920] border border-[#2d3d49] rounded-2xl overflow-hidden shadow-2xl">
       {/* Map Header Toolbar */}
-      <div className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-3 bg-[#132029] border-b border-[#223542] text-xs">
+      <div className="flex flex-wrap items-center justify-between px-4 sm:px-6 py-3 bg-[#132029] border-b border-[#223542] text-sm">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 text-[#67e8f9] font-cinzel font-bold tracking-wider">
             <Compass className="w-4 h-4 text-[#38bdf8]" />
             <span>GLOBAL SEA & FLIGHT MAP</span>
           </div>
-          <span className="hidden sm:inline-block text-[#527184]">•</span>
-          <span className="text-[#8baec2] font-serif-vintage hidden sm:inline-block">
-            Tracking your homing pigeons & ocean drift bottles
-          </span>
         </div>
 
-        <div className="flex items-center gap-4 text-[11px] font-serif-vintage text-[#8baec2]">
+        <div className="flex items-center gap-4 text-xs font-serif-vintage text-[#8baec2]">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-0.5 bg-[#f59e0b] rounded"></span>
             <span className="text-[#fed7aa]">Pigeon Flight Path</span>
@@ -112,9 +108,6 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
             <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse"></span>
             <span className="text-[#bae6fd]">Drifting Bottle</span>
           </div>
-          <span className="text-[#4e6a7c] hidden md:inline">
-            (Click any marker to reread written letter)
-          </span>
         </div>
       </div>
 
@@ -326,8 +319,8 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
                   title: `🕊️ Pigeon "${pigeon.pigeonName || 'Homer'}"`,
                   subtitle: `Heading: ${pigeon.destinationName} (${pigeon.recipient})`,
                   detail: isDelivered 
-                    ? `Delivered safely in ${pigeon.destinationName}. Click to reread written letter.`
-                    : `Flying with ${clothing.name}. Day ${pigeon.currentDay} en route (${pigeon.progressPercent}%). Click to reread written letter.`,
+                    ? `Delivered safely in ${pigeon.destinationName}.`
+                    : `Flying with ${clothing.name}. In flight (${pigeon.progressPercent}%) · ${pigeon.currentZoneName || 'Navigating headwinds'}.`,
                   x: curPos.x,
                   y: curPos.y,
                   letter,
@@ -382,7 +375,7 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
                   type: 'bottle',
                   title: `🍾 Glass Drift Bottle (${insignia.name} Wax Seal)`,
                   subtitle: `Adrift: ${bottle.daysAdrift} days · ${bottle.nauticalMilesTravelled} nmi`,
-                  detail: `Floating freely in ocean gyres without fixed route. When found by a stranger, it will disappear from this chart. Click to reread written letter.`,
+                  detail: `Floating freely in ocean gyres without fixed route. When found by a stranger, it will disappear from this chart.`,
                   x: curX,
                   y: curY,
                   letter,
@@ -424,16 +417,12 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
             <div className="font-bold text-sm text-[#fed7aa] flex items-center gap-1.5 mb-1">
               <span>{hoveredEntity.title}</span>
             </div>
-            <div className="text-[11px] text-[#93c5fd] font-sans font-medium mb-1.5">
+            <div className="text-xs text-[#93c5fd] font-sans font-medium mb-1.5">
               {hoveredEntity.subtitle}
             </div>
-            <p className="text-[#cbd5e1] text-[11px] leading-relaxed mb-2">
+            <p className="text-[#cbd5e1] text-xs leading-relaxed">
               {hoveredEntity.detail}
             </p>
-            <div className="pt-1.5 border-t border-[#314859] text-[10px] text-[#fde047] flex items-center gap-1 font-sans">
-              <Eye className="w-3 h-3" />
-              <span>Click marker to open letter parchment</span>
-            </div>
           </div>
         )}
 
@@ -447,8 +436,8 @@ export const DashboardMap: React.FC<DashboardMapProps> = ({
               <h4 className="font-cinzel text-base font-bold text-[#f1f5f9] mb-1">
                 The Skies & Tides Await Dispatches
               </h4>
-              <p className="text-xs text-[#94a3b8] font-serif-vintage leading-relaxed">
-                Click "Send Letter with Pigeon" or cast an ocean bottle to begin tracking your dispatches across the world map.
+              <p className="text-sm text-[#94a3b8] font-serif-vintage leading-relaxed">
+                Dispatch letters by homing pigeon or cast glass bottles to trace their journeys across the world map.
               </p>
             </div>
           </div>
